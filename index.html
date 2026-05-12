@@ -1,154 +1,116 @@
-card pdf
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scaffolding ID Card Generator</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title>Genuinity Check - Verification System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f0f0; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-
-        /* ID Card standard size: 85.6mm x 53.98mm */
-        .card-container { width: 450px; margin-bottom: 20px; }
-
-        .id-card {
-            width: 450px;
-            height: 280px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #ccc;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #e1f5fe 100%);
-        }
-
-        /* Front Side Styles */
-        .header { display: flex; justify-content: space-between; padding: 10px; }
-        .logo-text { font-weight: bold; color: #2e7d32; font-size: 24px; }
-        .scheme-name { text-align: right; font-size: 14px; font-weight: 900; text-transform: uppercase; }
-
-        .content { display: flex; padding: 0 15px; }
-        .details { flex: 1; margin-top: 10px; }
-        .name { font-size: 22px; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; }
-        .info-row { font-size: 16px; margin: 3px 0; font-weight: bold; color: #1b5e20; }
-        .info-row span { color: #000; margin-left: 5px; }
-
-        .photo-box { width: 130px; height: 150px; border: 2px solid #ddd; background: #eee; border-radius: 5px; overflow: hidden; }
-        .photo-box img { width: 100%; height: 100%; object-fit: cover; }
-
-        .footer-bar {
-            position: absolute;
-            bottom: 10px;
-            width: 94%;
-            left: 3%;
-            background: #2e7d32;
-            color: white;
-            text-align: center;
-            padding: 8px 0;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 20px;
-            letter-spacing: 2px;
-        }
-
-        /* Back Side Styles */
-        .back-side { padding: 15px; text-align: center; }
-        .top-icons { display: flex; justify-content: space-between; align-items: flex-start; }
-        .safety-logo { width: 70px; }
-        .qr-code { width: 80px; height: 80px; background: #000; } /* Placeholder */
-
-        .center-circle {
-            width: 150px;
-            height: 150px;
-            background: #7986cb;
-            border-radius: 50%;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 10px;
-        }
-
-        .notice-text { font-size: 12px; margin-top: 15px; font-weight: bold; }
-
-        .btn-download {
-            padding: 10px 25px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-        }
+        .tuv-blue { background-color: #005596; }
+        .tuv-text { color: #005596; }
+        .hidden { display: none; }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 min-h-screen">
 
-    <div id="capture-area" class="card-container">
-        <div class="id-card">
-            <div class="header">
-                <div class="logo-text">M.G.T</div>
-                <div class="scheme-name">CONSTRUCTION INDUSTRY<br>SCAFFOLDERS RECORD SCHEME</div>
-            </div>
-            <div class="content">
-                <div class="details">
-                    <div class="name"NASIR AHAMMED</div>
-                    <div class="info-row">RESIDENT: <span>126868585</span></div>
-                    <div class="info-row">ISSUE DATE: <span>24-11-2025</span></div>
-                    <div class="info-row">EXPIRY DATE: <span>23-11-2030</span></div>
-                    <div class="info-row">CARD: <span>572895</span></div>
-                </div>
-                <div class="photo-box">
-                    <img src="https://postimg.cc/Cz14SFcW" alt="User Photo">
-                </div>
-            </div>
-            <div style="margin-left: 15px; font-weight: bold; color: #2e7d32; margin-top: 5px;">3 days Trying his good</div>
-            <div class="footer-bar">SCAFFOLDING LABOURER</div>
+    <div class="bg-white border-b-4 border-blue-900 p-4 flex justify-between items-center shadow-md">
+        <div class="flex items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/T%C3%9CV_S%C3%9CD_logo.svg" class="h-10 mr-3">
+            <span class="tuv-text font-bold text-xl tracking-tighter">TÜV SÜD MIDDLE EAST</span>
+        </div>
+        <button class="text-xs border px-2 py-1 text-gray-400">HOME</button>
+    </div>
+
+    <div class="max-w-md mx-auto mt-10 p-4">
+        
+        <div id="search-box" class="bg-white p-6 rounded-lg shadow-xl text-center border border-gray-200">
+            <h1 class="text-gray-600 text-lg font-medium">WELCOME TO GENUINITY CHECK</h1>
+            <h2 class="text-gray-800 font-bold text-xl mb-6">VERIFY CARD / CERTIFICATE</h2>
+            
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/T%C3%9CV_S%C3%9CD_logo.svg" class="h-20 mx-auto mb-6 opacity-80">
+            
+            <p class="text-sm text-gray-500 mb-2">Please Enter Report / Certificate / ID Card Number</p>
+            <input type="text" id="certId" placeholder="CERTIFICATE OR ID CARD NUMBER" 
+                   class="w-full border-2 border-gray-200 p-3 rounded mb-4 text-center focus:border-blue-500 outline-none font-bold">
+            
+            <button onclick="checkCertificate()" id="submitBtn" 
+                    class="w-full tuv-blue text-white font-bold py-3 rounded-md hover:bg-blue-800 transition-all uppercase tracking-widest">
+                Submit!
+            </button>
+            <p id="error" class="text-red-500 mt-4 hidden">Certificate Not Found! Please try again.</p>
         </div>
 
-        <div class="id-card back-side">
-            <div class="top-icons">
-                <div style="text-align: left; font-size: 10px; font-weight: bold;">
-                    The authenticity of this card can be checked by QR Scan
-                    <br><br>
-                    <img src="https://via.placeholder.com/60" alt="Safety Logo" style="width: 60px;">
+        <div id="result-box" class="bg-white rounded shadow-2xl hidden overflow-hidden border border-gray-200">
+            <div class="flex p-4 gap-4 bg-white">
+                <div class="w-1/3">
+                    <img id="res-photo" src="" class="w-full border-2 border-blue-900 rounded shadow-sm bg-gray-100">
+                    <div id="res-name-label" class="tuv-blue text-white text-[10px] p-2 mt-1 font-bold text-center uppercase leading-tight"></div>
                 </div>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=Verified" alt="QR Code" style="width: 80px;">
+                <div class="w-2/3">
+                    <h3 id="res-id" class="tuv-text font-black text-sm mb-3 border-b pb-1"></h3>
+                    <div class="text-[10px] space-y-1.5 uppercase font-medium">
+                        <p><span class="text-gray-400 w-24 inline-block">TYPE</span> : <span id="res-type" class="text-gray-800"></span></p>
+                        <p><span class="text-gray-400 w-24 inline-block">COMPANY NAME</span> : <span id="res-company" class="text-gray-800"></span></p>
+                        <p><span class="text-gray-400 w-24 inline-block">LOCATION</span> : <span id="res-location" class="text-gray-800"></span></p>
+                        <p><span class="text-gray-400 w-24 inline-block">COUNTRY</span> : <span id="res-country" class="text-gray-800"></span></p>
+                        <p><span class="text-gray-400 w-24 inline-block">CERTIFIED AS</span> : <span id="res-certified" class="text-gray-800"></span></p>
+                        <p><span class="text-gray-400 w-24 inline-block">IQAMA NO</span> : <span id="res-iqama" class="text-gray-800"></span></p>
+                        <p><span class="text-gray-400 w-24 inline-block">TRAINER</span> : <span id="res-trainer" class="text-gray-800"></span></p>
+                        <p><span class="text-gray-400 w-24 inline-block">ISSUE DATE</span> : <span id="res-issue" class="text-gray-800"></span></p>
+                        <p><span class="text-gray-400 w-24 inline-block">EXPIRY DATE</span> : <span id="res-expiry" class="text-gray-800"></span></p>
+                    </div>
+                </div>
             </div>
-
-            <div class="center-circle">
-                [Icon Placeholder]
-            </div>
-
-            <div class="notice-text">
-                The cardholder has met the Health and Safety Awareness<br>
-                requirements as laid out in the CSCS Scheme Booklet
-            </div>
-            <div style="font-size: 12px; margin-top: 10px; font-weight: bold;">
-                CSCS is a registered Certification Mark
-            </div>
+            <button onclick="window.location.reload()" class="w-full bg-gray-100 py-3 text-xs font-bold text-gray-500 border-t hover:bg-gray-200 uppercase">Back to Search</button>
         </div>
     </div>
 
-    <button class="btn-download" onclick="downloadPDF()">Download PDF</button>
-
     <script>
-        function downloadPDF() {
-            const element = document.getElementById('capture-area');
-            const opt = {
-                margin: 10,
-                filename: 'scaffolder_card.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().set(opt).from(element).save();
+        // আপনার Apps Script পাবলিশ করার পর যে URL পাবেন তা এখানে বসান
+        const WEB_APP_URL = "আপনার_DEPLOYED_WEB_APP_URL_এখানে_দিন";
+
+        async function checkCertificate() {
+            const id = document.getElementById('certId').value;
+            const btn = document.getElementById('submitBtn');
+            const error = document.getElementById('error');
+
+            if(!id) return alert("Please enter ID!");
+
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+            error.classList.add('hidden');
+
+            try {
+                const response = await fetch(`${WEB_APP_URL}?id=${id}`);
+                const result = await response.json();
+
+                if(result.status === "success") {
+                    const d = result.data;
+                    document.getElementById('search-box').classList.add('hidden');
+                    document.getElementById('result-box').classList.remove('hidden');
+
+                    // ডাটা ম্যাপিং
+                    document.getElementById('res-id').innerText = d.ID;
+                    document.getElementById('res-name-label').innerText = d.Name;
+                    document.getElementById('res-type').innerText = d.Type;
+                    document.getElementById('res-company').innerText = d.Company;
+                    document.getElementById('res-location').innerText = d.Location;
+                    document.getElementById('res-country').innerText = d.Country;
+                    document.getElementById('res-certified').innerText = d.Certified_As;
+                    document.getElementById('res-iqama').innerText = d.Iqama_No;
+                    document.getElementById('res-trainer').innerText = d.Trainer;
+                    document.getElementById('res-issue').innerText = d.Issue_Date;
+                    document.getElementById('res-expiry').innerText = d.Expiry_Date;
+                    document.getElementById('res-photo').src = d.Photo_URL;
+                } else {
+                    error.classList.remove('hidden');
+                }
+            } catch (e) {
+                alert("Server Error! Check Internet or Script URL.");
+            } finally {
+                btn.innerText = "Submit!";
+                btn.disabled = false;
+            }
         }
     </script>
 </body>
