@@ -1,146 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification - TÜV SÜD MIDDLE EAST</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .tuv-blue { color: #005596; }
-        .tuv-bg-blue { background-color: #005596; }
-        .btn-submit { background-color: #007bff; }
-        .hidden { display: none; }
-        .captcha-box { background: repeating-linear-gradient(45deg, #f1f1f1, #f1f1f1 10px, #e9e9e9 10px, #e9e9e9 20px); border: 1px solid #ccc; font-family: 'Courier New', Courier, monospace; letter-spacing: 5px; font-weight: bold; font-style: italic; font-size: 20px; color: #444; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M.G.T - Record Verification Portal</title>
+<style>
+:root { --primary-blue: #1a237e; --accent-red: #d32f2f; --bg-gray: #f8f9fa; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #e9ecef; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+
+header { width: 100%; background: var(--primary-blue); color: white; padding: 20px 0; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.heading-main { font-size: 20px; font-weight: bold; letter-spacing: 1px; margin: 0; padding: 0 10px; text-transform: uppercase; }
+.sub-heading { font-size: 16px; margin-top: 5px; color: #ffeb3b; font-weight: bold; }
+
+.container { background: white; width: 90%; max-width: 450px; margin-top: 40px; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 5px solid var(--accent-red); }
+h2 { font-size: 18px; color: #333; margin-top: 0; }
+input[type="text"] { width: 100%; padding: 15px; margin: 20px 0; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; transition: 0.3s; }
+input[type="text"]:focus { border-color: var(--primary-blue); }
+button { width: 100%; background: var(--primary-blue); color: white; padding: 15px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+button:hover { background: #0d47a1; transform: translateY(-1px); }
+
+#resultCard { display: none; background: white; width: 95%; max-width: 550px; margin: 30px 0; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.15); border: 1px solid #ddd; }
+.org-tag { background: #f1f1f1; padding: 10px; text-align: center; font-weight: bold; color: var(--primary-blue); border-bottom: 1px solid #eee; }
+.result-header { padding: 20px; display: flex; align-items: center; gap: 20px; background: linear-gradient(to right, #ffffff, #f9f9f9); }
+.profile-pic { width: 110px; height: 135px; border: 3px solid var(--primary-blue); border-radius: 5px; object-fit: cover; background: #eee; }
+.user-id-header { color: var(--accent-red); font-weight: bold; font-size: 18px; margin-bottom: 5px; }
+
+.info-grid { padding: 20px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 12px; font-size: 14px; background: white; }
+.label { font-weight: bold; color: #555; background: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 4px solid var(--primary-blue); }
+.value { padding: 10px; color: #222; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; text-transform: capitalize; }
+
+.qr-section { text-align: center; padding: 20px; background: #f9f9f9; border-top: 1px dashed #ccc; }
+.qr-section img { width: 120px; height: 120px; border: 5px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.qr-text { font-size: 11px; color: #777; margin-top: 8px; text-transform: uppercase; }
+
+footer { margin-top: auto; padding: 25px; font-size: 12px; color: #666; text-align: center; line-height: 1.6; }
+.loader { display: none; border: 4px solid #f3f3f3; border-top: 4px solid var(--primary-blue); border-radius: 50%; width: 35px; height: 35px; animation: spin 1s linear infinite; margin: 20px auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+</style>
 </head>
 <body>
 
-    <header class="bg-white border-b shadow-sm py-3 px-4 flex justify-between items-center">
-        <div class="flex items-center">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/T%C3%9CV_S%C3%9CD_logo.svg" alt="TUV Logo" class="h-10">
-            <span class="ml-10 tuv-blue font-bold text-lg tracking-tight uppercase">TÜV SÜD MIDDLE EAST</span>
-        </div>
-        <button class="border border-gray-300 px-3 py-1 text-[10px] text-gray-500 rounded bg-gray-50">HOME</button>
-    </header>
+<header>
+<div class="heading-main">CONSTRUCTION INDUSTRY SKILLS RECORD SCHEME</div>
+<div class="sub-heading">Organization: M.G.T</div>
+</header>
 
-    <main class="max-w-xl mx-auto mt-12 px-4">
-        
-        <div id="search-section" class="bg-white p-8 rounded shadow-sm text-center border-t-2 border-transparent">
-            <h1 class="text-gray-700 text-xl font-medium tracking-wide uppercase">Welcome to Genuinity Check</h1>
-            <h2 class="text-gray-900 font-bold text-xl mb-8 uppercase">Verify Card / Certificate</h2>
-            
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/T%C3%9CV_S%C3%9CD_logo.svg" class="h-16 mx-auto mb-2 opacity-90">
-            <p class="tuv-blue font-bold text-sm mb-6 uppercase">TÜV SÜD MIDDLE EAST</p>
-            
-            <p class="text-xs text-gray-600 mb-2">Please Enter Report / Certificate / ID Card Number</p>
-            <input type="text" id="cert-id" placeholder="CERTIFICATE OR ID CARD NUMBER" class="w-full border p-2 text-sm rounded mb-4 text-center focus:outline-none focus:ring-1 focus:ring-blue-400">
-            
-            <p class="text-[10px] text-gray-500 mb-1">Retype the characters from the picture:</p>
-            <div class="flex flex-col items-center gap-2 mb-4">
-                <div id="captcha-img" class="captcha-box px-6 py-1 select-none pointer-events-none">E4MTE8</div>
-                <input type="text" id="captcha-input" class="w-full border p-2 text-sm rounded text-center focus:outline-none" placeholder="CAPTCHA">
-            </div>
-            
-            <button onclick="handleVerification()" id="submit-btn" class="w-full btn-submit text-white font-bold py-2.5 rounded text-sm hover:opacity-90 transition uppercase">Submit!</button>
-            <p id="error-msg" class="text-red-500 text-xs mt-4 hidden font-semibold"></p>
-        </div>
+<div class="container" id="searchBox">
+<h2>Record Verification Portal</h2>
+<p style="font-size: 14px; color: #666;">Enter Resident Number to verify</p>
+<div id="loader" class="loader"></div>
+<input type="text" id="certInput" placeholder="Ex: 126585145">
+<button onclick="verifyID()">SEARCH RECORD</button>
+</div>
 
-        <div id="result-section" class="bg-white rounded shadow-lg hidden border border-gray-200 overflow-hidden">
-            <div class="flex p-4 gap-4">
-                <div class="w-1/3">
-                    <img id="res-photo" src="" class="w-full border shadow-sm rounded-sm">
-                    <div class="tuv-bg-blue text-white text-[9px] text-center py-2 mt-1 uppercase font-bold leading-tight" id="res-name-label"></div>
-                </div>
-                <div class="w-2/3 border-l pl-4">
-                    <h2 class="tuv-blue font-bold text-[13px] border-b pb-1 mb-2" id="res-cert-no"></h2>
-                    <div class="text-[10px] space-y-1.5 uppercase text-gray-700">
-                        <div class="flex justify-between border-b border-gray-50 pb-0.5"><span class="text-gray-400">Type</span> <span class="font-bold w-1/2" id="res-type"></span></div>
-                        <div class="flex justify-between border-b border-gray-50 pb-0.5"><span class="text-gray-400">Company Name</span> <span class="font-bold w-1/2" id="res-company"></span></div>
-                        <div class="flex justify-between border-b border-gray-50 pb-0.5"><span class="text-gray-400">Location</span> <span class="font-bold w-1/2" id="res-location"></span></div>
-                        <div class="flex justify-between border-b border-gray-50 pb-0.5"><span class="text-gray-400">Country</span> <span class="font-bold w-1/2" id="res-country"></span></div>
-                        <div class="flex justify-between border-b border-gray-50 pb-0.5"><span class="text-gray-400">Certified As</span> <span class="font-bold w-1/2" id="res-certified"></span></div>
-                        <div class="flex justify-between border-b border-gray-50 pb-0.5"><span class="text-gray-400">Iqama No</span> <span class="font-bold w-1/2" id="res-iqama"></span></div>
-                        <div class="flex justify-between border-b border-gray-50 pb-0.5"><span class="text-gray-400">Trainer/Assessor</span> <span class="font-bold w-1/2" id="res-trainer"></span></div>
-                        <div class="flex justify-between border-b border-gray-50 pb-0.5"><span class="text-gray-400">Issue Date</span> <span class="font-bold w-1/2" id="res-issue"></span></div>
-                        <div class="flex justify-between border-b border-gray-50 pb-0.5"><span class="text-gray-400">Expiry Date</span> <span class="font-bold w-1/2" id="res-expiry"></span></div>
-                    </div>
-                </div>
-            </div>
-            <button onclick="location.reload()" class="w-full bg-gray-100 py-2.5 text-[11px] font-bold text-gray-500 uppercase border-t hover:bg-gray-200 transition">Search Another</button>
-        </div>
-    </main>
+<div id="resultCard">
+<div class="org-tag">M.G.T OFFICIAL VERIFICATION</div>
+<div class="result-header">
+<img id="u_photo" src="" alt="Photo" class="profile-pic">
+<div>
+<div id="u_resident" class="user-id-header"></div>
+<div id="u_name" style="font-weight: bold; font-size: 20px; color: #1a237e;"></div>
+</div>
+</div>
 
-    <footer class="mt-20 text-center text-[10px] text-gray-400 pb-10">
-        <p>© 2026 TÜV SÜD Middle East. All Rights Reserved.</p>
-        <div class="flex justify-center gap-3 mt-2">
-            <a href="#" class="tuv-blue">About</a> <span>•</span> <a href="#" class="tuv-blue">Imprint</a> <span>•</span> <a href="#" class="tuv-blue">Privacy Policy</a>
-        </div>
-    </footer>
+<div class="info-grid">
+<div class="label">FULL NAME</div> <div class="value" id="res_name"></div>
+<div class="label">TRAINER</div> <div class="value" id="u_trainer"></div>
+<div class="label">LOCATION</div> <div class="value" id="u_loc"></div>
+<div class="label">CERTIFIED AS</div> <div class="value" id="u_as" style="text-transform: uppercase; font-weight: bold; color: #1a237e;"></div>
+<div class="label">ISSUE DATE</div> <div class="value" id="u_issue"></div>
+<div class="label">EXPIRY DATE</div> <div class="value" id="u_expiry" style="color: #d32f2f; font-weight: bold;"></div>
+<div class="label">STATUS</div> <div class="value" style="color: green; font-weight: bold;">✓ VERIFIED</div>
+</div>
 
-    <script>
-        // আপনার Apps Script পাবলিশ করার পর পাওয়া লিঙ্ক এখানে বসান
-        const SCRIPT_URL = "আপনার_DEPLOYED_WEB_APP_URL_এখানে_দিন";
+<div class="qr-section">
+<img id="qr_image" src="" alt="QR Code">
+<div class="qr-text">Scan to verify this record online</div>
+</div>
 
-        // সিম্পল ক্যাপচা ভেরিফিকেশন
-        const currentCaptcha = "E4MTE8"; 
+<button onclick="window.location.reload()" style="margin: 20px; width: calc(100% - 40px); background: #666;">NEW SEARCH</button>
+</div>
 
-        async function handleVerification() {
-            const certId = document.getElementById('cert-id').value.trim();
-            const captchaInput = document.getElementById('captcha-input').value.trim();
-            const btn = document.getElementById('submit-btn');
-            const errorMsg = document.getElementById('error-msg');
+<footer>
+© 2012 M.G.T - Management Group Training.<br>
+Verified Skills Record Scheme.
+</footer>
 
-            if(!certId) {
-                alert("Please enter ID Number");
-                return;
-            }
+<script>
+async function verifyID() {
+    const inputID = document.getElementById('certInput').value.trim();
+    const loader = document.getElementById('loader');
+    const resultCard = document.getElementById('resultCard');
+    const searchBox = document.getElementById('searchBox');
 
-            if(captchaInput.toUpperCase() !== currentCaptcha) {
-                errorMsg.innerText = "Invalid Captcha! Please re-type correctly.";
-                errorMsg.classList.remove('hidden');
-                return;
-            }
+    if (!inputID) {
+        alert("Please enter a Resident Number!");
+        return;
+    }
 
-            // সার্চ প্রসেস শুরু
-            btn.innerText = "Verifying...";
-            btn.disabled = true;
-            errorMsg.classList.add('hidden');
+    loader.style.display = "block";
 
-            try {
-                const response = await fetch(`${SCRIPT_URL}?id=${encodeURIComponent(certId)}`);
-                const result = await response.json();
+    // আপনার গুগল শিট আইডি
+    const sheetId = '19Lkwwaty_oxl3Pq--frZ0xomrSXpxg4ZCFK6YVGvF6A';
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
 
-                if(result.status === "success") {
-                    const d = result.data;
-                    document.getElementById('search-section').classList.add('hidden');
-                    document.getElementById('result-section').classList.remove('hidden');
-                    
-                    // ডাটা ম্যাপিং
-                    document.getElementById('res-cert-no').innerText = d.ID;
-                    document.getElementById('res-name-label').innerText = d.Name;
-                    document.getElementById('res-type').innerText = d.Type;
-                    document.getElementById('res-company').innerText = d.Company;
-                    document.getElementById('res-location').innerText = d.Location;
-                    document.getElementById('res-country').innerText = d.Country;
-                    document.getElementById('res-certified').innerText = d.Certified_As;
-                    document.getElementById('res-iqama').innerText = d.Iqama_No;
-                    document.getElementById('res-trainer').innerText = d.Trainer;
-                    document.getElementById('res-issue').innerText = d.Issue_Date;
-                    document.getElementById('res-expiry').innerText = d.Expiry_Date;
-                    document.getElementById('res-photo').src = d.Photo_URL || "https://via.placeholder.com/150";
-                } else {
-                    errorMsg.innerText = "No record found for this ID.";
-                    errorMsg.classList.remove('hidden');
-                }
-            } catch (error) {
-                errorMsg.innerText = "Connection error. Check Apps Script URL.";
-                errorMsg.classList.remove('hidden');
-            } finally {
-                btn.innerText = "Submit!";
-                btn.disabled = false;
-            }
+    try {
+        const response = await fetch(url);
+        const data = await response.text();
+
+        const rows = data.split('\n').map(row => 
+            row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(cell => cell.replace(/"/g, '').trim())
+        );
+
+        /* ছবির কলাম অনুযায়ী ম্যাপিং (Index শুরু ০ থেকে):
+           A(0): ID, B(1): Name, C(2): Type, D(3): Company, E(4): Location, 
+           F(5): Country, G(6): Certified_As, H(7): Resident Number, 
+           I(8): Trainer, J(9): Issue Date, K(10): Expiry Date, L(11): Photo URL
+        */
+
+        const match = rows.find(row => row[7] === inputID); // H কলাম = Index 7
+
+        if (match) {
+            document.getElementById('u_resident').innerText = "ID: " + match[7];
+            document.getElementById('u_name').innerText = match[1]; // B কলাম
+            document.getElementById('res_name').innerText = match[1];
+            document.getElementById('u_trainer').innerText = match[8]; // I কলাম
+            document.getElementById('u_loc').innerText = match[4] + ", " + match[5]; // Location + Country
+            document.getElementById('u_as').innerText = match[6]; // G কলাম (Mason/Carpenter ইত্যাদি)
+            document.getElementById('u_issue').innerText = match[9]; // J কলাম
+            document.getElementById('u_expiry').innerText = match[10]; // K কলাম
+            document.getElementById('u_photo').src = match[11]; // L কলাম
+
+            const currentSiteURL = window.location.href;
+            document.getElementById('qr_image').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentSiteURL)}`;
+
+            resultCard.style.display = "block";
+            searchBox.style.display = "none";
+        } else {
+            alert("No Record Found for Resident Number: " + inputID);
         }
-    </script>
+    } catch (error) {
+        console.error(error);
+        alert("Error: শিটটি Public করা আছে কি না নিশ্চিত করুন।");
+    } finally {
+        loader.style.display = "none";
+    }
+}
+</script>
+
 </body>
 </html>
