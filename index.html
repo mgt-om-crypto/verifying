@@ -3,87 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M.G.T - Record Verification Portal</title>
+<title>M.G.T - Elite Verification Portal</title>
 <style>
-:root { --primary-blue: #1a237e; --accent-red: #d32f2f; --bg-gray: #f8f9fa; }
-body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #e9ecef; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+:root { 
+    --premium-dark: #121212; 
+    --gold-accent: #c5a059; 
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --text-main: #2c3e50;
+}
 
-header { width: 100%; background: var(--primary-blue); color: white; padding: 20px 0; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-.heading-main { font-size: 20px; font-weight: bold; letter-spacing: 1px; margin: 0; padding: 0 10px; text-transform: uppercase; }
-.sub-heading { font-size: 16px; margin-top: 5px; color: #ffeb3b; font-weight: bold; }
+body { 
+    font-family: 'Inter', -apple-system, sans-serif; 
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%); 
+    margin: 0; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    min-height: 100vh; 
+    color: white;
+}
 
-.container { background: white; width: 90%; max-width: 450px; margin-top: 40px; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 5px solid var(--accent-red); }
-h2 { font-size: 18px; color: #333; margin-top: 0; }
-input[type="text"] { width: 100%; padding: 15px; margin: 20px 0; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; transition: 0.3s; }
-input[type="text"]:focus { border-color: var(--primary-blue); }
-button { width: 100%; background: var(--primary-blue); color: white; padding: 15px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
-button:hover { background: #0d47a1; transform: translateY(-1px); }
+/* Premium Header */
+header { 
+    width: 100%; 
+    background: rgba(0, 0, 0, 0.8); 
+    padding: 25px 0; 
+    text-align: center; 
+    border-bottom: 2px solid var(--gold-accent);
+    backdrop-filter: blur(10px);
+}
+.heading-main { 
+    font-size: 22px; 
+    font-weight: 800; 
+    letter-spacing: 2px; 
+    color: #fff; 
+    text-transform: uppercase; 
+}
+.sub-heading { 
+    font-size: 14px; 
+    color: var(--gold-accent); 
+    margin-top: 8px; 
+    letter-spacing: 3px;
+    font-weight: 300;
+}
 
-#resultCard { display: none; background: white; width: 95%; max-width: 550px; margin: 30px 0; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.15); border: 1px solid #ddd; }
-.org-tag { background: #f1f1f1; padding: 10px; text-align: center; font-weight: bold; color: var(--primary-blue); border-bottom: 1px solid #eee; }
-.result-header { padding: 20px; display: flex; align-items: center; gap: 20px; background: linear-gradient(to right, #ffffff, #f9f9f9); }
-.profile-pic { width: 110px; height: 135px; border: 3px solid var(--primary-blue); border-radius: 5px; object-fit: cover; background: #eee; }
-.user-id-header { color: var(--accent-red); font-weight: bold; font-size: 18px; margin-bottom: 5px; }
+/* Glassmorphism Container */
+.container { 
+    background: var(--glass-bg); 
+    width: 90%; 
+    max-width: 420px; 
+    margin-top: 60px; 
+    padding: 40px; 
+    border-radius: 20px; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4); 
+    color: var(--text-main);
+    text-align: center;
+}
 
-.info-grid { padding: 20px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 12px; font-size: 14px; background: white; }
-.label { font-weight: bold; color: #555; background: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 4px solid var(--primary-blue); }
-.value { padding: 10px; color: #222; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; text-transform: capitalize; }
+h2 { font-size: 24px; margin-bottom: 10px; font-weight: 700; color: var(--premium-dark); }
 
-.qr-section { text-align: center; padding: 20px; background: #f9f9f9; border-top: 1px dashed #ccc; }
-.qr-section img { width: 120px; height: 120px; border: 5px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-.qr-text { font-size: 11px; color: #777; margin-top: 8px; text-transform: uppercase; }
+input[type="text"] { 
+    width: 100%; 
+    padding: 16px; 
+    margin: 25px 0; 
+    border: 1px solid #ddd; 
+    border-radius: 12px; 
+    box-sizing: border-box; 
+    font-size: 16px; 
+    background: #f9f9f9;
+    transition: all 0.3s;
+}
+input[type="text"]:focus { border-color: var(--gold-accent); outline: none; box-shadow: 0 0 10px rgba(197, 160, 89, 0.2); }
 
-footer { margin-top: auto; padding: 25px; font-size: 12px; color: #666; text-align: center; line-height: 1.6; }
-.loader { display: none; border: 4px solid #f3f3f3; border-top: 4px solid var(--primary-blue); border-radius: 50%; width: 35px; height: 35px; animation: spin 1s linear infinite; margin: 20px auto; }
+button { 
+    width: 100%; 
+    background: var(--premium-dark); 
+    color: var(--gold-accent); 
+    padding: 18px; 
+    border: 1px solid var(--gold-accent); 
+    border-radius: 12px; 
+    font-size: 14px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.4s; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+button:hover { background: var(--gold-accent); color: white; transform: translateY(-3px); }
+
+/* Premium Result Card */
+#resultCard { 
+    display: none; 
+    background: white; 
+    width: 95%; 
+    max-width: 500px; 
+    margin: 40px 0; 
+    border-radius: 25px; 
+    overflow: hidden; 
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5); 
+    color: var(--text-main);
+}
+
+.premium-border { height: 8px; background: linear-gradient(to right, #8e6e2e, #c5a059, #8e6e2e); }
+
+.result-header { 
+    padding: 30px; 
+    display: flex; 
+    align-items: center; 
+    gap: 25px; 
+    background: #fcfcfc;
+}
+
+.profile-pic { 
+    width: 120px; 
+    height: 150px; 
+    border: 4px solid #fff; 
+    border-radius: 15px; 
+    object-fit: cover; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.user-title { font-size: 22px; font-weight: 800; color: var(--premium-dark); margin: 0; }
+.user-id-badge { 
+    display: inline-block; 
+    padding: 4px 12px; 
+    background: var(--premium-dark); 
+    color: var(--gold-accent); 
+    border-radius: 20px; 
+    font-size: 12px; 
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.info-grid { padding: 30px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 15px; background: #fff; }
+.label { font-weight: 600; color: #888; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+.value { font-weight: 600; color: #333; font-size: 15px; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
+
+.qr-section { background: #f9f9f9; padding: 25px; text-align: center; border-top: 1px solid #eee; }
+.qr-section img { width: 100px; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+footer { margin-top: auto; padding: 30px; font-size: 11px; color: rgba(255,255,255,0.5); text-align: center; letter-spacing: 1px; }
+
+.loader { display: none; border: 3px solid #f3f3f3; border-top: 3px solid var(--gold-accent); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 10px auto; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 
 <header>
-<div class="heading-main">CONSTRUCTION INDUSTRY SKILLS RECORD SCHEME</div>
-<div class="sub-heading">Organization: M.G.T</div>
+    <div class="heading-main">M.G.T GLOBAL VERIFICATION</div>
+    <div class="sub-heading">PROFESSIONAL SKILLS RECORD</div>
 </header>
 
 <div class="container" id="searchBox">
-<h2>Record Verification Portal</h2>
-<p style="font-size: 14px; color: #666;">Enter Resident Number to verify</p>
-<div id="loader" class="loader"></div>
-<input type="text" id="certInput" placeholder="Ex: 126585145">
-<button onclick="verifyID()">SEARCH RECORD</button>
+    <h2>Verify Credentials</h2>
+    <p style="font-size: 13px; color: #777;">Access the secure database by entering your ID</p>
+    <div id="loader" class="loader"></div>
+    <input type="text" id="certInput" placeholder="SYSTEM ID (Ex: 636)">
+    <button onclick="verifyID()">AUTHORIZE ACCESS</button>
 </div>
 
 <div id="resultCard">
-<div class="org-tag">M.G.T OFFICIAL VERIFICATION</div>
-<div class="result-header">
-<img id="u_photo" src="" alt="Photo" class="profile-pic">
-<div>
-<div id="u_resident" class="user-id-header"></div>
-<div id="u_name" style="font-weight: bold; font-size: 20px; color: #1a237e;"></div>
-</div>
-</div>
+    <div class="premium-border"></div>
+    <div class="result-header">
+        <img id="u_photo" src="" alt="Profile" class="profile-pic">
+        <div>
+            <div id="u_name" class="user-title"></div>
+            <div id="u_display_id" class="user-id-badge"></div>
+        </div>
+    </div>
 
-<div class="info-grid">
-<div class="label">FULL NAME</div> <div class="value" id="res_name"></div>
-<div class="label">TRAINER</div> <div class="value" id="u_trainer"></div>
-<div class="label">LOCATION</div> <div class="value" id="u_loc"></div>
-<div class="label">CERTIFIED AS</div> <div class="value" id="u_as" style="text-transform: uppercase; font-weight: bold; color: #1a237e;"></div>
-<div class="label">ISSUE DATE</div> <div class="value" id="u_issue"></div>
-<div class="label">EXPIRY DATE</div> <div class="value" id="u_expiry" style="color: #d32f2f; font-weight: bold;"></div>
-<div class="label">STATUS</div> <div class="value" style="color: green; font-weight: bold;">✓ VERIFIED</div>
-</div>
+    <div class="info-grid">
+        <div class="label">Professional Name</div> <div class="value" id="res_name"></div>
+        <div class="label">Resident Number</div> <div class="value" id="u_res_no"></div>
+        <div class="label">Qualification</div> <div class="value" id="u_as" style="color: var(--gold-accent);"></div>
+        <div class="label">Assigned Trainer</div> <div class="value" id="u_trainer"></div>
+        <div class="label">Authorized Location</div> <div class="value" id="u_loc"></div>
+        <div class="label">Date of Issue</div> <div class="value" id="u_issue"></div>
+        <div class="label">Valid Until</div> <div class="value" id="u_expiry" style="color: #e74c3c;"></div>
+        <div class="label">Status</div> <div class="value" style="color: #27ae60;">ACTIVE & VERIFIED</div>
+    </div>
 
-<div class="qr-section">
-<img id="qr_image" src="" alt="QR Code">
-<div class="qr-text">Scan to verify this record online</div>
-</div>
+    <div class="qr-section">
+        <img id="qr_image" src="" alt="Verification QR">
+        <div style="font-size: 9px; color: #aaa; margin-top: 10px; font-weight: bold;">SECURE DIGITAL SIGNATURE</div>
+    </div>
 
-<button onclick="window.location.reload()" style="margin: 20px; width: calc(100% - 40px); background: #666;">NEW SEARCH</button>
+    <button onclick="window.location.reload()" style="margin: 20px; width: calc(100% - 40px); background: #eee; color: #555; border: none;">EXIT RECORD</button>
 </div>
 
 <footer>
-© 2012 M.G.T - Management Group Training.<br>
-Verified Skills Record Scheme.
+    © 2012 M.G.T MANAGEMENT GROUP TRAINING<br>
+    SECURED BY ELITE VERIFICATION SYSTEM
 </footer>
 
 <script>
@@ -93,60 +204,48 @@ async function verifyID() {
     const resultCard = document.getElementById('resultCard');
     const searchBox = document.getElementById('searchBox');
 
-    if (!inputID) {
-        alert("Please enter a Resident Number!");
-        return;
-    }
+    if (!inputID) return alert("Security Notice: Please enter a valid System ID.");
 
     loader.style.display = "block";
 
-    // আপনার গুগল শিট আইডি
     const sheetId = '19Lkwwaty_oxl3Pq--frZ0xomrSXpxg4ZCFK6YVGvF6A';
     const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
 
     try {
         const response = await fetch(url);
         const data = await response.text();
-
         const rows = data.split('\n').map(row => 
             row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(cell => cell.replace(/"/g, '').trim())
         );
 
-        /* ছবির কলাম অনুযায়ী ম্যাপিং (Index শুরু ০ থেকে):
-           A(0): ID, B(1): Name, C(2): Type, D(3): Company, E(4): Location, 
-           F(5): Country, G(6): Certified_As, H(7): Resident Number, 
-           I(8): Trainer, J(9): Issue Date, K(10): Expiry Date, L(11): Photo URL
-        */
-
-        const match = rows.find(row => row[7] === inputID); // H কলাম = Index 7
+        // A কলাম (Index 0) দিয়ে সার্চ
+        const match = rows.find(row => row[0] === inputID);
 
         if (match) {
-            document.getElementById('u_resident').innerText = "ID: " + match[7];
-            document.getElementById('u_name').innerText = match[1]; // B কলাম
+            document.getElementById('u_display_id').innerText = "REG ID: #" + match[0];
+            document.getElementById('u_name').innerText = match[1];
             document.getElementById('res_name').innerText = match[1];
-            document.getElementById('u_trainer').innerText = match[8]; // I কলাম
-            document.getElementById('u_loc').innerText = match[4] + ", " + match[5]; // Location + Country
-            document.getElementById('u_as').innerText = match[6]; // G কলাম (Mason/Carpenter ইত্যাদি)
-            document.getElementById('u_issue').innerText = match[9]; // J কলাম
-            document.getElementById('u_expiry').innerText = match[10]; // K কলাম
-            document.getElementById('u_photo').src = match[11]; // L কলাম
+            document.getElementById('u_as').innerText = match[6];
+            document.getElementById('u_res_no').innerText = match[7];
+            document.getElementById('u_trainer').innerText = match[8];
+            document.getElementById('u_loc').innerText = match[4] + ", " + match[5];
+            document.getElementById('u_issue').innerText = match[9];
+            document.getElementById('u_expiry').innerText = match[10];
+            document.getElementById('u_photo').src = match[11];
 
-            const currentSiteURL = window.location.href;
-            document.getElementById('qr_image').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentSiteURL)}`;
+            document.getElementById('qr_image').src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(window.location.href)}`;
 
             resultCard.style.display = "block";
             searchBox.style.display = "none";
         } else {
-            alert("No Record Found for Resident Number: " + inputID);
+            alert("Access Denied: No record associated with this ID.");
         }
     } catch (error) {
-        console.error(error);
-        alert("Error: শিটটি Public করা আছে কি না নিশ্চিত করুন।");
+        alert("System Error: Unable to reach database.");
     } finally {
         loader.style.display = "none";
     }
 }
 </script>
-
 </body>
 </html>
